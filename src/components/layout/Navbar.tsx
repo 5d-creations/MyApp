@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+// Navigation items
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
@@ -13,11 +14,26 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ];
 
+// Custom SVG Logo (replacing inline svg with your uploaded file)
+const Logo = () => (
+  <motion.img
+    src="/5D.svg" // place your 5D.svg in the public/ folder
+    alt="5D Creations Logo"
+    className="w-28 h-10 drop-shadow-[0_0_12px_rgba(0,255,255,0.8)]"
+    whileHover={{
+      scale: 1.1,
+      filter: "drop-shadow(0 0 20px rgba(0,255,255,1))",
+    }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  />
+);
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -26,6 +42,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -34,28 +51,19 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 120, damping: 20 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "glass backdrop-blur-md border-b border-border/20"
+          ? "bg-black/60 backdrop-blur-xl border-b border-cyan-500/20 shadow-[0_0_15px_rgba(0,255,255,0.2)]"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
-          >
-            <Link to="/" className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 bg-gradient-cyan rounded-lg flex items-center justify-center shadow-glow-cyan group-hover:shadow-glow-intense-cyan transition-all duration-300">
-                <Zap className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-cyan bg-clip-text text-transparent">
-                5D Creations
-              </span>
-            </Link>
-          </motion.div>
+          <Link to="/" className="flex items-center space-x-2">
+            <Logo />
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -67,15 +75,15 @@ export function Navbar() {
                   to={item.href}
                   className={`relative px-3 py-2 text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "text-cyan-400"
+                      : "text-gray-400 hover:text-white"
                   }`}
                 >
                   {item.name}
                   {isActive && (
                     <motion.div
                       layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-cyan shadow-glow-cyan"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-400 shadow-[0_0_8px_#0ff]"
                       initial={false}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
@@ -87,7 +95,11 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="sm" asChild>
+            <Button
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 text-black shadow-[0_0_10px_rgba(0,255,255,0.7)] hover:shadow-[0_0_20px_rgba(0,255,255,1)] transition-all"
+              size="sm"
+              asChild
+            >
               <Link to="/contact">Get Quote</Link>
             </Button>
           </div>
@@ -95,7 +107,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -106,10 +118,11 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass backdrop-blur-md border-t border-border/20"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden bg-black/70 backdrop-blur-md border-t border-cyan-500/20 shadow-[0_0_10px_rgba(0,255,255,0.4)]"
           >
             <div className="container mx-auto px-4 py-4 space-y-2">
               {navigation.map((item) => {
@@ -118,18 +131,21 @@ export function Navbar() {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`block px-3 py-2 text-base font-medium transition-all duration-200 rounded-md ${
+                    className={`block px-3 py-2 text-base font-medium rounded-md transition-all duration-200 ${
                       isActive
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                        ? "text-cyan-400 bg-cyan-500/10"
+                        : "text-gray-400 hover:text-white hover:bg-cyan-500/5"
                     }`}
                   >
                     {item.name}
                   </Link>
                 );
               })}
-              <div className="pt-2">
-                <Button variant="hero" className="w-full" asChild>
+              <div className="pt-3">
+                <Button
+                  className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black shadow-[0_0_10px_rgba(0,255,255,0.7)] hover:shadow-[0_0_20px_rgba(0,255,255,1)] transition-all"
+                  asChild
+                >
                   <Link to="/contact">Get Quote</Link>
                 </Button>
               </div>

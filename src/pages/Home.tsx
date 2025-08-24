@@ -56,7 +56,7 @@ const Hero = () => (
           variants={fadeInUp}
           className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
         >
-          Build bold experiences in{" "}
+          Build bold experiences in {" "}
           <span className="bg-gradient-cyan bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
             5 Dimensions
           </span>
