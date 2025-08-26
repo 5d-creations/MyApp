@@ -8,14 +8,14 @@ import {
   Instagram,
   Mail,
   Phone,
-  MapPin 
+  MapPin,
 } from "lucide-react";
 
 const quickLinks = [
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "About", href: "/about" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -31,6 +31,7 @@ const socialLinks = [
   { name: "LinkedIn", href: "#", icon: Linkedin },
   { name: "Twitter", href: "#", icon: Twitter },
   { name: "Instagram", href: "#", icon: Instagram },
+  { name: "Mail", href: "5dcreationskk@gmail.com", icon: Mail },
 ];
 
 export function Footer() {
@@ -115,11 +116,11 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>hello@5dcreations.dev</span>
+                <span>5dcreationskk@gmail.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary" />
-                <span>+91 98765 43210</span>
+                <span>+91 8825792220</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 text-primary" />

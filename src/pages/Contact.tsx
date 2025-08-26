@@ -71,14 +71,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@5dcreations.dev",
+    value: "5dcreationskk@gmail.com",
     description: "Send me an email anytime",
     color: "cyan"
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+91 98765 43210",
+    value: "+91 8825792220",
     description: "Call me during business hours",
     color: "violet"
   },
@@ -405,13 +405,13 @@ export default function Contact() {
                     <h3 className="text-xl font-semibold mb-4">Quick Contact</h3>
                     <div className="space-y-4">
                       <Button variant="neon" className="w-full justify-start" asChild>
-                        <a href="mailto:hello@5dcreations.dev">
+                        <a href="mailto:5dcreationskk@gmail.com">
                           <Mail className="w-4 h-4 mr-2" />
                           Email Me Directly
                         </a>
                       </Button>
                       <Button variant="neon" className="w-full justify-start" asChild>
-                        <a href="tel:+919876543210">
+                        <a href="tel:+918825792220">
                           <Phone className="w-4 h-4 mr-2" />
                           Call Now
                         </a>

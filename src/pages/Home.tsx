@@ -56,7 +56,7 @@ const Hero = () => (
           variants={fadeInUp}
           className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
         >
-          Build bold experiences in {" "}
+          Build bold experiences in {" "}<br/>
           <span className="bg-gradient-cyan bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_200%]">
             5 Dimensions
           </span>
@@ -179,25 +179,25 @@ const Services = () => (
 // Testimonials
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "Startup Founder",
+    name: "Manoj Kumar",
+    role: "AI Enthusiast",
     content: "5D Creations delivered exactly what we needed - a beautiful, fast website that converts visitors into customers. The attention to detail is incredible.",
     rating: 5,
-    avatar: "SC"
+    avatar: "Mk"
   },
   {
-    name: "Michael Rodriguez",
-    role: "Product Manager",
+    name: "Mithunkarthik",
+    role: "Early Career Dev",
     content: "Working with 5D was a game-changer. They understood our vision perfectly and delivered a solution that exceeded our expectations.",
     rating: 5,
-    avatar: "MR"
+    avatar: "Mk"
   },
   {
-    name: "Emma Thompson",
-    role: "Creative Director",
+    name: "Shri Maha Vishnu",
+    role: "Ui/Ux Expertise",
     content: "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
     rating: 5,
-    avatar: "ET"
+    avatar: "Mv"
   }
 ];
 

@@ -33,22 +33,22 @@ const skills = [
 
 const timeline = [
   {
-    year: "2024",
+    year: "2025",
     title: "5D Creations Founded",
     description: "Launched freelance practice focusing on full-stack development and modern web solutions."
   },
   {
-    year: "2023",
-    title: "Senior Full Stack Developer",
+    year: "2024",
+    title: "Full Stack Developer",
     description: "Led development of multiple high-impact projects, specializing in React and Django ecosystems."
   },
   {
-    year: "2022",
+    year: "2023",
     title: "React Specialist",
     description: "Transitioned to React ecosystem, mastering modern patterns and state management solutions."
   },
   {
-    year: "2021",
+    year: "2022",
     title: "Started Web Development",
     description: "Began journey in web development with focus on user experience and clean code practices."
   }
@@ -189,7 +189,7 @@ export default function About() {
             >
               <motion.div variants={fadeInUp} className="text-center mb-16">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                  My Journey
+                  Our Journey
                 </h2>
                 <p className="text-xl text-muted-foreground">
                   From curiosity to expertise - the path that led to 5D Creations
@@ -313,7 +313,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center text-muted-foreground">
                   <Mail className="w-5 h-5 mr-2 text-primary" />
-                  hello@5dcreations.dev
+                  5dcreationskk@gmail.com
                 </div>
               </div>
 

@@ -51,30 +51,12 @@ const projects = [
   },
   {
     id: 3,
-    title: "TeamMind",
-    description: "Collaborative knowledge base and project management platform with real-time editing and AI-powered insights.",
-    longDescription: "A Confluence-like knowledge management system designed for modern teams, featuring collaborative editing, intelligent search, and automated documentation.",
-    image: "/api/placeholder/600/400",
-    category: "SaaS Platform",
-    tech: ["React", "Node.js", "MongoDB", "Socket.io", "Elasticsearch"],
-    featured: true,
-    liveUrl: "https://teammind-app.com",
-    githubUrl: "https://github.com/5dcreations/teammind",
-    outcomes: [
-      "200% faster knowledge retrieval",
-      "90% reduction in duplicate work",
-      "Used by 1000+ teams globally",
-      "$2M+ in productivity savings"
-    ]
-  },
-  {
-    id: 4,
     title: "Diabetes Prediction ML",
     description: "Machine learning model for early diabetes prediction using patient data and lifestyle factors.",
     longDescription: "Advanced ML system that analyzes patient data, lifestyle patterns, and genetic factors to predict diabetes risk with 94% accuracy.",
-    image: "/api/placeholder/600/400",
+    image: "/image.png",
     category: "Machine Learning",
-    tech: ["Python", "TensorFlow", "Flask", "React", "Healthcare APIs"],
+    tech: ["Python", "TensorFlow", "Flask", "React", "Healthcare APIs", "PowerBI"],
     featured: false,
     liveUrl: "https://diabetes-predictor.com",
     githubUrl: "https://github.com/5dcreations/diabetes-ml",
@@ -86,41 +68,23 @@ const projects = [
     ]
   },
   {
-    id: 5,
-    title: "EcoTrack",
-    description: "Sustainability tracking dashboard for businesses to monitor and reduce their environmental impact.",
-    longDescription: "Comprehensive ESG tracking platform that helps businesses monitor carbon footprint, waste management, and sustainability goals with real-time analytics.",
-    image: "/api/placeholder/600/400",
-    category: "Dashboard",
-    tech: ["React", "Django", "PostgreSQL", "Chart.js", "AWS"],
+    id: 4,
+    title: "Mobile Number Tracking App",
+    description: "Mobile number tracking dashboard for real-time location and analytics.",
+    longDescription: "Comprehensive phone number tracking platform that enables users to monitor, locate, and analyze mobile numbers with real-time map integration and analytics dashboards.",
+    image: "/ph.png",
+    category: "Python",
+    tech: ["React", "Python", "Django", "TensorFlow"],
     featured: false,
-    liveUrl: "https://ecotrack-dashboard.com",
+    liveUrl: "https://numtrack-dashboard.com",
     githubUrl: "https://github.com/5dcreations/ecotrack",
     outcomes: [
-      "40% carbon footprint reduction",
-      "500+ companies using platform",
-      "ISO 14001 compliance achieved",
-      "Winner of Green Tech Award 2023"
+      "Live location tracking for over 1,000+ numbers",
+      "Rapid analytics on number movement and history",
+      "GDPR and data privacy compliance ensured",
+      "Recognized by Security Tech Summit 2025"
     ]
   },
-  {
-    id: 6,
-    title: "CryptoPortfolio",
-    description: "Real-time cryptocurrency portfolio tracker with advanced analytics and trading insights.",
-    longDescription: "Professional-grade crypto portfolio management tool with real-time market data, advanced charting, and automated trading strategies.",
-    image: "/api/placeholder/600/400",
-    category: "FinTech",
-    tech: ["React", "Node.js", "WebSocket", "Chart.js", "Crypto APIs"],
-    featured: false,
-    liveUrl: "https://cryptoportfolio-pro.com",
-    githubUrl: "https://github.com/5dcreations/cryptoportfolio",
-    outcomes: [
-      "$50M+ assets tracked",
-      "25K+ active traders",
-      "15% average portfolio growth",
-      "Featured in CoinDesk"
-    ]
-  }
 ];
 
 const categories = ["All", "Web Application", "Mobile App", "SaaS Platform", "Machine Learning", "Dashboard", "FinTech"];
@@ -166,7 +130,7 @@ export default function Portfolio() {
                 variants={fadeInUp}
                 className="text-xl text-muted-foreground mb-8 leading-relaxed"
               >
-                Explore our collection of successful projects that have helped businesses 
+                Explore our collection of successful projects that have helped businesses
                 grow, innovate, and achieve their goals.
               </motion.p>
             </motion.div>
@@ -210,9 +174,8 @@ export default function Portfolio() {
                 <motion.div
                   key={project.id}
                   variants={fadeInUp}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                    index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                  }`}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                    }`}
                 >
                   <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
                     <div className="glass rounded-2xl p-2 shadow-glow-cyan hover:shadow-glow-intense-cyan transition-all duration-300">
@@ -223,7 +186,7 @@ export default function Portfolio() {
                       />
                     </div>
                   </div>
-                  
+
                   <div className={`space-y-6 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                     <div>
                       <Badge className="mb-4">{project.category}</Badge>
@@ -331,13 +294,13 @@ export default function Portfolio() {
                         <Badge>{project.category}</Badge>
                       </div>
                     </div>
-                    
+
                     <div className="p-6">
                       <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
                       <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                         {project.description}
                       </p>
-                      
+
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tech.slice(0, 3).map((tech) => (
                           <Badge key={tech} variant="outline" className="text-xs">
@@ -350,7 +313,7 @@ export default function Portfolio() {
                           </Badge>
                         )}
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <Button variant="minimal" size="sm" className="flex-1" asChild>
                           <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
