@@ -15,9 +15,10 @@ const navigation = [
 const Logo = () => (
   <motion.div
     className="flex items-center space-x-2"
-    whileHover={{ scale: 1.1, rotate: 1 }}
+    whileHover={{ scale: 1.1, rotate: 0.2 }}
     transition={{ type: "spring", stiffness: 250, damping: 15 }}
   >
+    {/* Logo Icon */}
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
@@ -34,7 +35,18 @@ const Logo = () => (
         fill="url(#grad)"
       />
     </svg>
-    <span className="hidden md:inline text-2xl font-extrabold bg-gradient-to-r from-cyan-300 via-sky-400 to-indigo-500 bg-clip-text text-transparent tracking-tight">
+
+    {/* Brand Name */}
+    <span
+      className="hidden md:inline text-2xl font-extrabold tracking-widest 
+      text-transparent bg-clip-text 
+      bg-gradient-to-r from-cyan-300 via-sky-400 to-indigo-500
+      drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]"
+      style={{
+        WebkitTextStroke: "0.6px #0ff", // Neon outline
+        letterSpacing: "0.15em", // Wider futuristic spacing
+      }}
+    >
       5D Creations
     </span>
   </motion.div>
@@ -55,9 +67,9 @@ export function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 120, damping: 18 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.2 }}
       className={`fixed top-3 inset-x-4 z-50 rounded-2xl px-4 md:px-6 transition-all duration-500 ${
         scrolled
           ? "bg-black/50 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
