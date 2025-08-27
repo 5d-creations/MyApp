@@ -132,7 +132,7 @@ export default function Contact() {
 
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
           <div className="container mx-auto px-4 relative">
             <motion.div
@@ -168,42 +168,8 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* Contact Info Cards */}
-        <section className="py-24 bg-surface">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={{
-                animate: {
-                  transition: { staggerChildren: 0.1 }
-                }
-              }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-            >
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.label}
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                >
-                  <Card className={`p-6 text-center glass border-border/20 hover:border-${info.color === 'cyan' ? 'primary' : 'secondary'}/40 transition-all duration-300 hover:shadow-glow-${info.color} h-full`}>
-                    <div className={`w-12 h-12 bg-gradient-${info.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-glow-${info.color}`}>
-                      <info.icon className="w-6 h-6 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2">{info.label}</h3>
-                    <p className="text-primary font-medium mb-2">{info.value}</p>
-                    <p className="text-sm text-muted-foreground">{info.description}</p>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
         {/* Contact Form */}
-        <section className="py-24">
+        <section className="py-20 bg-surface">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <motion.div
@@ -455,6 +421,40 @@ export default function Contact() {
                 </motion.div>
               </motion.div>
             </div>
+          </div>
+        </section>
+        
+        {/* Contact Info Cards */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={{
+                animate: {
+                  transition: { staggerChildren: 0.1 }
+                }
+              }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            >
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={info.label}
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                >
+                  <Card className={`p-6 text-center glass border-border/20 hover:border-${info.color === 'cyan' ? 'primary' : 'secondary'}/40 transition-all duration-300 hover:shadow-glow-${info.color} h-full`}>
+                    <div className={`w-12 h-12 bg-gradient-${info.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-glow-${info.color}`}>
+                      <info.icon className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">{info.label}</h3>
+                    <p className="text-primary font-medium mb-2">{info.value}</p>
+                    <p className="text-sm text-muted-foreground">{info.description}</p>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </section>
       </main>
