@@ -1,9 +1,9 @@
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -13,7 +13,7 @@ import { AnimatePresence, motion } from "framer-motion";
 // ✅ React Query instance
 const queryClient = new QueryClient();
 
-// Lazy-loaded pages (SEO-friendly when hydrated + faster performance)
+// Lazy-loaded pages
 const Index = lazy(() => import("./pages/Index"));
 const Services = lazy(() => import("./pages/Services"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
@@ -21,11 +21,41 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+// ✅ Page transition wrapper
+const PageTransition = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.2, ease: "easeInOut" }}
+    className="min-h-[70vh]"
+  >
+    {children}
+  </motion.div>
+);
+
+// ✅ Routes with transitions
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+        <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+        <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 750); // give time for preloader exit animation
     return () => clearTimeout(timer);
   }, []);
 
@@ -37,84 +67,35 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <AnimatePresence mode="wait">
-              {loading ? (
-                <Preloader key="preloader" loading={loading} />
-              ) : (
-                <motion.div
-                  key="app"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.1, ease: "easeOut" }}
-                  className="min-h-screen bg-background text-foreground"
-                >
-                  {/* ✅ Global SEO tags */}
-                  <Helmet>
-                    <title>5D Creations | Modern Web Development & Design</title>
-                    <meta
-                      name="description"
-                      content="Welcome to 5D Creation — a modern creative web development, Design and innovative digital services."
-                    />
-                    <meta name="robots" content="index, follow" />
-                    <link rel="canonical" href="https://www.5dcreations.com/" />
-
-                    {/* Open Graph / Social */}
-                    <meta property="og:title" content="5D Creations" />
-                    <meta
-                      property="og:description"
-                      content="Explore services, projects, and digital creations from 5D Creations."
-                    />
-                    <meta
-                      property="og:image"
-                      content="https://www.5dcreations.com/preview.jpg"
-                    />
-                    <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://www.5dcreations.com/" />
-
-                    {/* Twitter */}
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="5D Creations" />
-                    <meta
-                      name="twitter:description"
-                      content="Discover creative works, services, and portfolio from 5D Creation."
-                    />
-                    <meta
-                      name="twitter:image"
-                      content="https://www.5dcreations.com/preview.jpg"
-                    />
-
-                    {/* Structured Data Example */}
-                    <script type="application/ld+json">{`
-                      {
-                        "@context": "https://schema.org",
-                        "@type": "WebSite",
-                        "name": "5D Creations",
-                        "url": "https://www.5dcreations.com",
-                        "author": {
-                          "@type": "Organization",
-                          "name": "5D Creations"
-                        }
-                      }
-                    `}</script>
-                  </Helmet>
-
-                  <Navbar />
-                  <main role="main">
-                    <Suspense fallback={<Preloader loading={true} />}>
-                      <Routes>
-                        <Route path="/" element={<Index />} />
-                        <Route path="/services" element={<Services />} />
-                        <Route path="/portfolio" element={<Portfolio />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
-                    </Suspense>
-                  </main>
-                  <Footer />
-                </motion.div>
-              )}
+              {loading && <Preloader key="preloader" loading={loading} />}
             </AnimatePresence>
+
+            {/* Render Navbar only after Preloader is gone */}
+            {!loading && (
+              <motion.div
+                key="app"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="min-h-screen bg-background text-foreground"
+              >
+                <Helmet>
+                  <title>5D Creations | Modern Web Development & Design</title>
+                  <meta
+                    name="description"
+                    content="Welcome to 5D Creation — a modern creative web development, Design and innovative digital services."
+                  />
+                  <link rel="canonical" href="https://www.5dcreations.com/" />
+                </Helmet>
+
+                <Navbar />
+                <main role="main">
+                  <AnimatedRoutes />
+                </main>
+                <Footer />
+              </motion.div>
+            )}
           </BrowserRouter>
         </TooltipProvider>
       </HelmetProvider>
