@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Logo from "../assets/logo.svg";
+import Logo from "/logo.svg";
 
 const Preloader = ({ loading }) => {
   if (!loading) return null;
