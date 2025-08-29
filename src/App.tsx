@@ -9,6 +9,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Preloader from "./components/layout/Preloader";
 import { AnimatePresence, motion } from "framer-motion";
+import ConstellationBackground from "@/components/layout/ConstellationBackground";
 
 // ✅ React Query instance
 const queryClient = new QueryClient();
@@ -69,6 +70,7 @@ const App = () => {
             <AnimatePresence mode="wait">
               {loading && <Preloader key="preloader" loading={loading} />}
             </AnimatePresence>
+            <ConstellationBackground />
 
             {/* Render Navbar only after Preloader is gone */}
             {!loading && (

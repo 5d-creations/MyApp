@@ -2,12 +2,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import { 
-  ArrowRight, 
-  Code2, 
-  Palette, 
-  Zap, 
-  Shield, 
+import {
+  ArrowRight,
+  Code2,
+  Palette,
+  Zap,
+  Shield,
   TrendingUp,
   Star,
   Quote
@@ -15,8 +15,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { fadeInUp, staggerChildren } from "@/lib/variants";
+import { useEffect, useRef } from "react";
 
-// ✅ Reusable Section Header
+// ✅ Section Header
 const SectionHeader = ({ title, subtitle }) => (
   <motion.div
     initial="initial"
@@ -25,10 +26,7 @@ const SectionHeader = ({ title, subtitle }) => (
     variants={staggerChildren}
     className="text-center mb-16"
   >
-    <motion.h2
-      variants={fadeInUp}
-      className="text-3xl md:text-5xl font-bold mb-6"
-    >
+    <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
       {title}
     </motion.h2>
     {subtitle && (
@@ -44,20 +42,15 @@ const SectionHeader = ({ title, subtitle }) => (
 
 // ✅ Hero
 const Hero = () => (
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-    {/* Background Effects */}
-    <div className="absolute inset-0 bg-gradient-mesh" />
-    <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
-    <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse-glow animation-delay-1000" />
-    
-    <div className="container mx-auto px-4 relative z-10 text-center max-w-5xl">
+  <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/20 to-background" />
+    <div className="container mx-auto px-4 relative z-20 text-center max-w-5xl">
       <motion.div initial="initial" animate="animate" variants={staggerChildren}>
         <motion.span
           variants={fadeInUp}
           className="inline-flex items-center px-4 py-2 rounded-full glass border border-primary/20 text-sm font-medium text-primary mb-6"
         >
-          <Zap className="w-4 h-4 mr-2" />
-          Building the Future, One Dimension at a Time
+          <Zap className="w-4 h-4 mr-2" /> Building the Future, One Dimension at a Time
         </motion.span>
 
         <motion.h1
@@ -74,8 +67,7 @@ const Hero = () => (
           variants={fadeInUp}
           className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
         >
-          Design, code, speed, reliability, and impact. I design & ship modern web apps 
-          with a glowing aesthetic, clean code, and measurable results.
+          Design, code, speed, reliability, and impact. I craft modern web apps with a glowing aesthetic, clean architecture, and measurable results.
         </motion.p>
 
         <motion.div
@@ -84,7 +76,7 @@ const Hero = () => (
         >
           <Button variant="hero" size="xl" asChild>
             <Link to="/contact" className="group">
-              Get a Quote
+              Get a Quote{" "}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
@@ -102,13 +94,15 @@ const services = [
   {
     icon: Code2,
     title: "Web Development",
-    description: "Modern React & Django applications with clean architecture and scalable design.",
+    description:
+      "Modern React & Django applications with clean architecture and scalable design.",
     color: "cyan"
   },
   {
     icon: Palette,
     title: "UI/UX Design",
-    description: "Beautiful, intuitive interfaces that users love and convert visitors into customers.",
+    description:
+      "Beautiful, intuitive interfaces that users love and convert visitors into customers.",
     color: "violet"
   },
   {
@@ -120,13 +114,15 @@ const services = [
   {
     icon: Shield,
     title: "Security",
-    description: "Robust, secure applications with modern authentication and data protection.",
+    description:
+      "Robust, secure applications with modern authentication and data protection.",
     color: "violet"
   },
   {
     icon: TrendingUp,
     title: "Growth",
-    description: "Data-driven solutions that scale with your business and drive measurable impact.",
+    description:
+      "Data-driven solutions that scale with your business and drive measurable impact.",
     color: "cyan"
   }
 ];
@@ -182,21 +178,24 @@ const testimonials = [
   {
     name: "Manoj Kumar",
     role: "AI Enthusiast",
-    content: "5D Creations delivered exactly what we needed - a beautiful, fast website that converts visitors into customers. The attention to detail is incredible.",
+    content:
+      "5D Creations delivered exactly what we needed - a beautiful, fast website that converts visitors into customers. The attention to detail is incredible.",
     rating: 5,
     avatar: "MK"
   },
   {
     name: "Mithunkarthik",
     role: "Early Career Dev",
-    content: "Working with 5D was a game-changer. They understood our vision perfectly and delivered a solution that exceeded our expectations.",
+    content:
+      "Working with 5D was a game-changer. They understood our vision perfectly and delivered a solution that exceeded our expectations.",
     rating: 5,
     avatar: "MK"
   },
   {
     name: "Shri Maha Vishnu",
     role: "UI/UX Expert",
-    content: "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
+    content:
+      "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
     rating: 5,
     avatar: "MV"
   }
@@ -226,9 +225,7 @@ const Testimonials = () => (
                 ))}
               </div>
               <Quote className="w-8 h-8 text-primary/20 mb-4" />
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                "{content}"
-              </p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">"{content}"</p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gradient-cyan rounded-full flex items-center justify-center text-primary-foreground font-semibold mr-4">
                   {avatar}
@@ -258,16 +255,14 @@ const CTA = () => (
         variants={fadeInUp}
         className="text-center max-w-3xl mx-auto"
       >
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">
-          Ready to Build Something Amazing?
-        </h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Build Something Amazing?</h2>
         <p className="text-xl text-muted-foreground mb-8">
           Let's discuss your project and bring your vision to life with cutting-edge technology and beautiful design.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button variant="hero" size="xl" asChild>
             <Link to="/contact" className="group">
-              Start Your Project
+              Start Your Project{" "}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
