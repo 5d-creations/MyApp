@@ -32,7 +32,7 @@ const services = [
 ];
 
 const socialLinks = [
-  { name: "Mail", href: "mailto:5dcreationskk@gmail.com", icon: MailIcon },
+  { name: "Mail", href: "mailto:official@5dtech.in", icon: MailIcon },
   { name: "LinkedIn", href: "https://linkedin.com/", icon: Linkedin },
   { name: "Twitter", href: "https://twitter.com/", icon: XIcon },
   { name: "Instagram", href: "https://instagram.com/", icon: Instagram },
@@ -157,11 +157,11 @@ export function Footer() {
             <h3 className="text-foreground font-semibold mb-4">Contact</h3>
             <div className="space-y-3 text-sm text-muted-foreground">
               <a
-                href="mailto:5dcreationskk@gmail.com"
+                href="mailto:official@5dtech.in"
                 className="flex items-center gap-2 hover:text-primary"
               >
                 <Mail className="w-4 h-4 text-primary" />
-                5dcreationskk@gmail.com
+                official@5dtech.in
               </a>
               <a
                 href="tel:+918825792220"

@@ -291,7 +291,7 @@ export default function About() {
                   <MapPin className="w-5 h-5 text-primary" /> Bangalore, India
                 </div>
                 <div className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-primary" /> 5dcreationskk@gmail.com
+                  <Mail className="w-5 h-5 text-primary" /> official@5dtech.in
                 </div>
               </div>
 

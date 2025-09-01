@@ -66,7 +66,7 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "5dcreationskk@gmail.com",
+    value: "official@5dtech.in",
     description: "Send me an email anytime",
     color: "cyan",
   },
@@ -258,7 +258,7 @@ export default function Contact() {
                   <h3 className="text-xl font-semibold mb-4">Quick Contact</h3>
                   <div className="space-y-4">
                     <Button variant="neon" className="w-full justify-start" asChild>
-                      <a href="mailto:5dcreationskk@gmail.com">
+                      <a href="mailto:official@5dtech.in">
                         <Mail className="w-4 h-4 mr-2" /> Email Me
                       </a>
                     </Button>

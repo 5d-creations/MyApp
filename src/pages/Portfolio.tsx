@@ -97,7 +97,7 @@ const projects = [
     tech: ["Python", "TensorFlow", "Flask", "React", "Healthcare APIs"],
     featured: false,
     liveUrl: "https://diabetes-predictor.com",
-    githubUrl: "https://github.com/5dcreations/diabetes-ml",
+    githubUrl: "https://github.com/5dtech/diabetes-ml",
     outcomes: ["94% accuracy", "10K+ patients helped", "Journal publication"],
   },
 ];
