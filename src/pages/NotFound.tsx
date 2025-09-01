@@ -17,8 +17,8 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>404 - Page Not Found | 5D Creations</title>
-        <meta name="description" content="The page you're looking for doesn't exist. Return to 5D Creations homepage." />
+        <title>404 - Page Not Found | 5D Tech</title>
+        <meta name="description" content="The page you're looking for doesn't exist. Return to 5D Tech homepage." />
       </Helmet>
 
       <main className="min-h-screen flex items-center justify-center relative overflow-hidden">

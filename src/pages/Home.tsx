@@ -179,7 +179,7 @@ const testimonials = [
     name: "Manoj Kumar",
     role: "AI Enthusiast",
     content:
-      "5D Creations delivered exactly what we needed - a beautiful, fast website that converts visitors into customers. The attention to detail is incredible.",
+      "5D Tech delivered exactly what we needed - a beautiful, fast website that converts visitors into customers. The attention to detail is incredible.",
     rating: 5,
     avatar: "MK"
   },
@@ -198,6 +198,14 @@ const testimonials = [
       "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
     rating: 5,
     avatar: "MV"
+  },
+  {
+    name: "Gowshick Gandhi",
+    role: "SEo Analyst",
+    content:
+      "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
+    rating: 5,
+    avatar: "GG"
   }
 ];
 

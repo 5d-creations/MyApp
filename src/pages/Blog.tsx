@@ -18,7 +18,7 @@ const blogPosts = [
     title: "Building Scalable React Applications with TypeScript",
     excerpt: "Learn how to structure large React applications using TypeScript, modern patterns, and best practices for maintainable code.",
     content: "In this comprehensive guide, we'll explore the essential patterns and practices for building scalable React applications...",
-    author: "5D Creations",
+    author: "5D Tech",
     publishedAt: "2024-01-15",
     readTime: "8 min read",
     tags: ["React", "TypeScript", "Architecture"],
@@ -30,7 +30,7 @@ const blogPosts = [
     title: "Django REST Framework: Advanced API Patterns",
     excerpt: "Deep dive into advanced Django REST Framework patterns for building robust, secure, and scalable APIs.",
     content: "Django REST Framework provides powerful tools for API development. Let's explore advanced patterns...",
-    author: "5D Creations",
+    author: "5D Tech",
     publishedAt: "2024-01-10",
     readTime: "12 min read",
     tags: ["Django", "API", "Python"],
@@ -42,7 +42,7 @@ const blogPosts = [
     title: "The Art of Modern Web Design: Glassmorphism & Beyond",
     excerpt: "Explore contemporary design trends including glassmorphism, neumorphism, and creating engaging user interfaces.",
     content: "Modern web design is constantly evolving. Today we'll explore the latest trends in UI design...",
-    author: "5D Creations",
+    author: "5D Tech",
     publishedAt: "2024-01-05",
     readTime: "6 min read",
     tags: ["Design", "UI/UX", "Trends"],
@@ -54,7 +54,7 @@ const blogPosts = [
     title: "Performance Optimization: Making Web Apps Lightning Fast",
     excerpt: "Comprehensive guide to web performance optimization, from code splitting to CDN implementation.",
     content: "Performance is crucial for user experience and SEO. Let's dive into optimization techniques...",
-    author: "5D Creations",
+    author: "5D Tech",
     publishedAt: "2023-12-28",
     readTime: "10 min read",
     tags: ["Performance", "Web Development", "SEO"],
@@ -66,7 +66,7 @@ const blogPosts = [
     title: "Cloud Deployment Strategies for Modern Web Applications",
     excerpt: "Compare different cloud deployment options and learn best practices for deploying React and Django applications.",
     content: "Choosing the right deployment strategy is crucial for application success. We'll compare various options...",
-    author: "5D Creations",
+    author: "5D Tech",
     publishedAt: "2023-12-20",
     readTime: "9 min read",
     tags: ["Cloud", "Deployment", "DevOps"],
@@ -78,7 +78,7 @@ const blogPosts = [
     title: "Authentication Best Practices in 2024",
     excerpt: "Modern authentication patterns including JWT, OAuth, and security considerations for web applications.",
     content: "Security is paramount in modern applications. Let's explore authentication best practices...",
-    author: "5D Creations",
+    author: "5D Tech",
     publishedAt: "2023-12-15",
     readTime: "11 min read",
     tags: ["Security", "Authentication", "JWT"],
@@ -96,7 +96,7 @@ export default function Blog() {
   return (
     <>
       <Helmet>
-        <title>Blog | 5D Creations - Web Development Insights & Tutorials</title>
+        <title>Blog | 5D Tech - Web Development Insights & Tutorials</title>
         <meta name="description" content="Read about web development, React, Django, UI/UX design, and modern development practices. Learn from real-world project experiences and technical insights." />
       </Helmet>
 

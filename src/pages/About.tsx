@@ -31,7 +31,7 @@ const skills = [
 const timeline = [
   {
     year: "2025",
-    title: "5D Creations Founded",
+    title: "5D Tech Founded",
     description:
       "Launched freelance practice focusing on full-stack development and modern web solutions.",
   },
@@ -59,10 +59,10 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>About | 5D Creations - Meet the Team</title>
+        <title>About | 5D Tech - Meet the Team</title>
         <meta
           name="description"
-          content="Learn about 5D Creations - passionate full-stack developers specializing in React, Django, and modern web technologies. Based in Bangalore, India."
+          content="Learn about 5D Tech - passionate full-stack developers specializing in React, Django, and modern web technologies. Based in Bangalore, India."
         />
       </Helmet>
 
@@ -181,7 +181,7 @@ export default function About() {
                   Our Journey
                 </h2>
                 <p className="text-xl text-muted-foreground">
-                  From curiosity to expertise - the path that led to 5D Creations
+                  From curiosity to expertise - the path that led to 5D Tech
                 </p>
               </motion.div>
 

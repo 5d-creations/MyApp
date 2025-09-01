@@ -50,7 +50,7 @@ const Preloader = ({ loading }) => {
           className="mt-6 text-2xl sm:text-3xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-500 drop-shadow-[0_0_18px_rgba(59,130,246,0.9)]"
           style={{ WebkitTextStroke: "0.6px #0ff", letterSpacing: "0.15em" }}
         >
-          5D Creations
+          5D Tech
         </motion.h1>
 
         <motion.p

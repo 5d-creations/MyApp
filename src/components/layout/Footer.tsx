@@ -9,11 +9,16 @@ import {
   Mail,
   Phone,
   MapPin,
+  MailIcon,
+  XCircle,
+  XIcon,
 } from "lucide-react";
 import Logo from "/logo.svg"; // ✅ Import your logo
+import { XAxis } from "recharts";
 
 const quickLinks = [
   { name: "Services", href: "/services" },
+  { name: "Blog", href: "/blog" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
@@ -27,9 +32,9 @@ const services = [
 ];
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/", icon: Github },
+  { name: "Mail", href: "mailto:5dcreationskk@gmail.com", icon: MailIcon },
   { name: "LinkedIn", href: "https://linkedin.com/", icon: Linkedin },
-  { name: "Twitter", href: "https://twitter.com/", icon: Twitter },
+  { name: "Twitter", href: "https://twitter.com/", icon: XIcon },
   { name: "Instagram", href: "https://instagram.com/", icon: Instagram },
 ];
 
@@ -73,15 +78,32 @@ export function Footer() {
                 <div className="w-12 h-12 flex items-center justify-center">
                   <img
                     src={Logo}
-                    alt="5D Creations Logo"
+                    alt="5D Tech Logo"
                     className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)] group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <span
-                  className="hidden md:inline text-2xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-indigo-500 drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]"
-                  style={{ WebkitTextStroke: "0.6px #0ff", letterSpacing: "0.15em" }}
-                >
-                  5D Creations
+                {/* Brand Text */}
+                <span className="hidden md:flex items-baseline space-x-1">
+                  {/* 5D */}
+                  <span
+                    className="text-3xl font-extrabold tracking-widest 
+        bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-600 
+        text-transparent bg-clip-text 
+        drop-shadow-[0_0_18px_rgba(0,255,255,0.9)] 
+        font-['Orbitron']"
+                    style={{ WebkitTextStroke: "0.6px #0ff" }}
+                  >
+                    5D
+                  </span>
+                  {/* Tech */}
+                  <span
+                    className="text-xl font-semibold 
+        bg-gradient-to-r from-gray-200 to-gray-400 
+        text-transparent bg-clip-text 
+        tracking-wide font-['Rajdhani']"
+                  >
+                    Tech
+                  </span>
                 </span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
@@ -158,7 +180,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="py-6 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} 5D Creations. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} 5D Tech. All rights reserved.</p>
           <div className="flex gap-6">
             <FooterLink to="/privacy">Privacy Policy</FooterLink>
             <FooterLink to="/terms">Terms of Service</FooterLink>

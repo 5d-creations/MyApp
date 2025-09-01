@@ -10,6 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import Preloader from "./components/layout/Preloader";
 import { AnimatePresence, motion } from "framer-motion";
 import ConstellationBackground from "@/components/layout/ConstellationBackground";
+import Blog from "./pages/Blog";
 
 // ✅ React Query instance
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+        <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />        
         <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
@@ -83,12 +85,12 @@ const App = () => {
                 className="min-h-screen bg-background text-foreground"
               >
                 <Helmet>
-                  <title>5D Creations | Modern Web Development & Design</title>
+                  <title>5D Tech | Modern Web Development & Design</title>
                   <meta
                     name="description"
-                    content="Welcome to 5D Creation — a modern creative web development, Design and innovative digital services."
+                    content="Welcome to 5D Tech — a modern creative web development, Design and innovative digital services."
                   />
-                  <link rel="canonical" href="https://www.5dcreations.com/" />
+                  <link rel="canonical" href="https://www.5dtech.in/" />
                 </Helmet>
 
                 <Navbar />

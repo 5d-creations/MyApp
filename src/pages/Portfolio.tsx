@@ -111,7 +111,7 @@ export default function Portfolio() {
   return (
     <>
       <Helmet>
-        <title>Portfolio | 5D Creations</title>
+        <title>Portfolio | 5D Tech</title>
         <meta
           name="description"
           content="Explore our portfolio of apps, ML projects, and digital solutions. Real projects with measurable impact."

@@ -166,10 +166,10 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact | 5D Creations - Let's Build Something Amazing</title>
+        <title>Contact | 5D Tech - Let's Build Something Amazing</title>
         <meta
           name="description"
-          content="Ready to start your project? Contact 5D Creations for web development, UI/UX design, and digital solutions. Get a free consultation and quote."
+          content="Ready to start your project? Contact 5D Tech for web development, UI/UX design, and digital solutions. Get a free consultation and quote."
         />
       </Helmet>
 

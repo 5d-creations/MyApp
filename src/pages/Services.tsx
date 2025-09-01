@@ -154,7 +154,7 @@ export default function Services() {
   return (
     <>
       <Helmet>
-        <title>Services | 5D Creations - Web Development & Design</title>
+        <title>Services | 5D Tech - Web Development & Design</title>
         <meta
           name="description"
           content="Professional web development services including React development, UI/UX design, API development, and performance optimization. Get a quote today."

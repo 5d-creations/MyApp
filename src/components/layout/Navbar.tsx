@@ -7,31 +7,58 @@ import { Button } from "@/components/ui/button";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Portfolio", href: "/portfolio" },
+  { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
 
+// ⚡ Updated Logo
 const Logo = () => (
   <motion.div
-    className="flex items-center space-x-2"
-    whileHover={{ scale: 1.1, rotate: 0.1 }}
+    className="flex items-center gap-2"
+    whileHover={{ scale: 1.08, rotate: 0.3 }}
     transition={{ type: "spring", stiffness: 250, damping: 15 }}
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-10 h-10 drop-shadow-[0_0_15px_rgba(0,255,255,0.7)]">
+    {/* Icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 100 100"
+      className="w-10 h-10 drop-shadow-[0_0_15px_rgba(0,255,255,0.7)]"
+    >
       <defs>
         <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#06b6d4" />
           <stop offset="100%" stopColor="#6366f1" />
         </linearGradient>
       </defs>
-      <path d="M15 20h40q20 0 20 30t-20 30H15v-20h30q5 0 5-5t-5-5H15z" fill="url(#grad)" />
+      <path
+        d="M15 20h40q20 0 20 30t-20 30H15v-20h30q5 0 5-5t-5-5H15z"
+        fill="url(#grad)"
+      />
     </svg>
-    <span
-      className="hidden md:inline text-2xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-indigo-500 drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]"
-      style={{ WebkitTextStroke: "0.6px #0ff", letterSpacing: "0.15em" }}
-    >
-      5D Creations
+
+    {/* Brand Text */}
+    <span className="hidden md:flex items-baseline space-x-1">
+      {/* 5D */}
+      <span
+        className="text-3xl font-extrabold tracking-widest 
+        bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-600 
+        text-transparent bg-clip-text 
+        drop-shadow-[0_0_18px_rgba(0,255,255,0.9)] 
+        font-['Orbitron']"
+        style={{ WebkitTextStroke: "0.6px #0ff" }}
+      >
+        5D
+      </span>
+      {/* Tech */}
+      <span
+        className="text-xl font-semibold 
+        bg-gradient-to-r from-gray-200 to-gray-400 
+        text-transparent bg-clip-text 
+        tracking-wide font-['Rajdhani']"
+      >
+        Tech
+      </span>
     </span>
   </motion.div>
 );
@@ -61,47 +88,95 @@ export function Navbar() {
       }`}
     >
       <div className="flex items-center justify-between h-14">
-        <Link to="/" className="flex items-center space-x-2"><Logo /></Link>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <Logo />
+        </Link>
 
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
               <motion.div key={item.name} whileHover={{ y: -2 }}>
-                <Link to={item.href} className={`relative px-2 py-1 text-sm font-medium tracking-wide transition-colors ${isActive ? "text-cyan-300" : "text-gray-300 hover:text-white"}`}>
+                <Link
+                  to={item.href}
+                  className={`relative px-2 py-1 text-sm font-medium tracking-wide transition-colors ${
+                    isActive
+                      ? "text-cyan-300"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
                   {item.name}
-                  {isActive && <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 to-indigo-400 rounded-full" transition={{ type: "spring", stiffness: 400, damping: 30 }} />}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-underline"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 to-indigo-400 rounded-full"
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 30,
+                      }}
+                    />
+                  )}
                 </Link>
               </motion.div>
             );
           })}
         </div>
 
+        {/* CTA Button */}
         <div className="hidden md:block">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 text-black font-semibold px-5 shadow-[0_0_18px_rgba(0,255,255,0.6)] hover:shadow-[0_0_25px_rgba(0,255,255,1)] transition-all" size="sm" asChild>
+            <Button
+              className="rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 text-black font-semibold px-5 shadow-[0_0_18px_rgba(0,255,255,0.6)] hover:shadow-[0_0_25px_rgba(0,255,255,1)] transition-all"
+              size="sm"
+              asChild
+            >
               <Link to="/contact">Get Quote</Link>
             </Button>
           </motion.div>
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-gray-400 hover:text-white transition-colors">
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+        >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
+      {/* Mobile Dropdown */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="md:hidden mt-2 rounded-xl bg-black/70 backdrop-blur-lg border border-white/10 p-4 space-y-2 shadow-[0_0_25px_rgba(0,255,255,0.2)]">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden mt-2 rounded-xl bg-black/70 backdrop-blur-lg border border-white/10 p-4 space-y-2 shadow-[0_0_25px_rgba(0,255,255,0.2)]"
+          >
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
               return (
-                <Link key={item.name} to={item.href} className={`block px-3 py-2 text-base font-medium rounded-lg ${isActive ? "text-cyan-300 bg-cyan-500/10" : "text-gray-300 hover:text-white hover:bg-cyan-500/5"}`}>
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`block px-3 py-2 text-base font-medium rounded-lg ${
+                    isActive
+                      ? "text-cyan-300 bg-cyan-500/10"
+                      : "text-gray-300 hover:text-white hover:bg-cyan-500/5"
+                  }`}
+                >
                   {item.name}
                 </Link>
               );
             })}
-            <Button className="w-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 text-black font-semibold shadow-[0_0_15px_rgba(0,255,255,0.7)] hover:shadow-[0_0_25px_rgba(0,255,255,1)]" asChild>
+            <Button
+              className="w-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 text-black font-semibold shadow-[0_0_15px_rgba(0,255,255,0.7)] hover:shadow-[0_0_25px_rgba(0,255,255,1)]"
+              asChild
+            >
               <Link to="/contact">Get Quote</Link>
             </Button>
           </motion.div>
