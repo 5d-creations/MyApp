@@ -23,7 +23,7 @@ const blogPosts = [
     readTime: "8 min read",
     tags: ["React", "TypeScript", "Architecture"],
     featured: true,
-    image: "/src/assets/react.png"
+    image: "/assets/react.png"
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const blogPosts = [
     readTime: "12 min read",
     tags: ["Django", "API", "Python"],
     featured: true,
-    image: "/src/assets/django.png"
+    image: "/assets/django.png"
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const blogPosts = [
     readTime: "6 min read",
     tags: ["Design", "UI/UX", "Trends"],
     featured: false,
-    image: "/src/assets/ui.png"
+    image: "/assets/ui.png"
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ const blogPosts = [
     readTime: "10 min read",
     tags: ["Performance", "Web Development", "SEO"],
     featured: false,
-    image: "/src/assets/web.png"
+    image: "/assets/web.png"
   },
   {
     id: 5,
@@ -71,7 +71,7 @@ const blogPosts = [
     readTime: "9 min read",
     tags: ["Cloud", "Deployment", "DevOps"],
     featured: false,
-    image: "/src/assets/cloud.png"
+    image: "/assets/cloud.png"
   },
   {
     id: 6,
@@ -83,7 +83,7 @@ const blogPosts = [
     readTime: "11 min read",
     tags: ["Security", "Authentication", "JWT"],
     featured: false,
-    image: "/src/assets/security.png"
+    image: "/assets/security.png"
   }
 ];
 
