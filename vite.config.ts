@@ -2,29 +2,32 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import sitemap from "vite-plugin-sitemap"; // ✅ add sitemap plugin
+import sitemap from "vite-plugin-sitemap"; // ✅ Sitemap plugin
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    // SPA fallback for React Router in dev
+    // React Router SPA fallback in dev
     historyApiFallback: true,
   },
   plugins: [
     react(),
     mode === "development" && componentTagger(),
-    sitemap({
-      hostname: "https://5dtech.in", // ✅ your site URL
-      outDir: "dist", // default is fine for Netlify
-      dynamicRoutes: [
-        "/", 
-        "/services",
-        "/blog",
-        "/contact"
-      ],
-    }),
+    mode === "production" &&
+      sitemap({
+        hostname: "https://5dtech.in", // ✅ Your site URL
+        outDir: "dist", // Default Netlify build dir
+        dynamicRoutes: [
+          "/", 
+          "/services",
+          "/blog",
+          "/contact",
+        ],
+        readable: true, // makes XML pretty formatted
+        changefreq: "weekly", // SEO hint
+        priority: 0.8, // SEO hint
+      }),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -32,6 +35,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    outDir: "dist",
     rollupOptions: {
       output: {
         entryFileNames: `assets/[name].js`,
