@@ -35,7 +35,7 @@ const socialLinks = [
   { name: "Mail", href: "mailto:official@5dtech.in", icon: MailIcon },
   { name: "LinkedIn", href: "https://linkedin.com/", icon: Linkedin },
   { name: "Twitter", href: "https://twitter.com/", icon: XIcon },
-  { name: "Instagram", href: "https://instagram.com/", icon: Instagram },
+  { name: "Instagram", href: "https://www.instagram.com/5d_tech/", icon: Instagram },
 ];
 
 const FooterLink = ({ to, children, external = false }) =>
