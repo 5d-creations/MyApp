@@ -27,6 +27,7 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" },
 };
 
+// ---------- Zod Validation Schema ----------
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
@@ -40,6 +41,7 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
+// ---------- Form Options ----------
 const projectTypes = [
   "Web Application",
   "Landing Page",
@@ -63,47 +65,24 @@ const budgetRanges = [
 const timelines = ["ASAP", "1-2 weeks", "1 month", "2-3 months", "3+ months", "Flexible"];
 
 const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "official@5dtech.in",
-    description: "Send me an email anytime",
-    color: "cyan",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+91 8825792220",
-    description: "Call me during business hours",
-    color: "violet",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Bangalore, India",
-    description: "Available for remote work worldwide",
-    color: "cyan",
-  },
-  {
-    icon: Clock,
-    label: "Response Time",
-    value: "Within 24 hours",
-    description: "I'll get back to you quickly",
-    color: "violet",
-  },
+  { icon: Mail, label: "Email", value: "official@5dtech.in", description: "Send me an email anytime", color: "cyan" },
+  { icon: Phone, label: "Phone", value: "+91 8825792220", description: "Call me during business hours", color: "violet" },
+  { icon: MapPin, label: "Location", value: "Bangalore, India", description: "Available for remote work worldwide", color: "cyan" },
+  { icon: Clock, label: "Response Time", value: "Within 24 hours", description: "I'll get back to you quickly", color: "violet" },
 ];
 
 // ---------- Reusable Form Components ----------
-const InputField = ({ label, icon: Icon, error, register, ...props }) => (
+const InputField = ({ label, icon: Icon, error, register, required = false, ...props }) => (
   <div>
-    <label className="block text-sm font-medium mb-2">{label}</label>
+    <label className="block text-sm font-medium mb-2">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
     <div className="relative">
-      {Icon && (
-        <Icon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-      )}
+      {Icon && <Icon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />}
       <input
         {...register}
         {...props}
+        required={required}
         className="w-full pl-10 pr-4 py-3 bg-surface border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
       />
     </div>
@@ -111,11 +90,14 @@ const InputField = ({ label, icon: Icon, error, register, ...props }) => (
   </div>
 );
 
-const SelectField = ({ label, error, register, options }) => (
+const SelectField = ({ label, error, register, options, required = false }) => (
   <div>
-    <label className="block text-sm font-medium mb-2">{label}</label>
+    <label className="block text-sm font-medium mb-2">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
     <select
       {...register}
+      required={required}
       className="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
     >
       <option value="">Select {label.toLowerCase()}</option>
@@ -129,14 +111,17 @@ const SelectField = ({ label, error, register, options }) => (
   </div>
 );
 
-const TextAreaField = ({ label, icon: Icon, error, register, ...props }) => (
+const TextAreaField = ({ label, icon: Icon, error, register, required = false, ...props }) => (
   <div>
-    <label className="block text-sm font-medium mb-2">{label}</label>
+    <label className="block text-sm font-medium mb-2">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
     <div className="relative">
       {Icon && <Icon className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />}
       <textarea
         {...register}
         {...props}
+        required={required}
         className="w-full pl-10 pr-4 py-3 bg-surface border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
       />
     </div>
@@ -145,35 +130,22 @@ const TextAreaField = ({ label, icon: Icon, error, register, ...props }) => (
 );
 
 export default function Contact() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm<ContactFormData>({
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
 
-  // ✅ Updated onSubmit with better error handling
   const onSubmit = async (data: ContactFormData) => {
     try {
       const API_BASE = import.meta.env.VITE_API_URL?.trim() || "http://localhost:5000";
-
-      console.log("🌍 Sending request to:", `${API_BASE}/send-email`);
-
       const res = await fetch(`${API_BASE}/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Server error (${res.status}): ${errorText}`);
-      }
+      if (!res.ok) throw new Error(`Server error (${res.status})`);
 
       const result = await res.json();
-
       if (result.success) {
         toast.success("✅ Message sent successfully! I'll reply within 24 hours.");
         reset();
@@ -181,14 +153,8 @@ export default function Contact() {
         toast.error(result.error || "❌ Failed to send message. Please try again.");
       }
     } catch (err: any) {
-      console.error("❌ Email error:", err);
-      if (err.message.includes("CORS")) {
-        toast.error("CORS error: Backend is blocking this origin. Check server allowedOrigins.");
-      } else if (err.message.includes("Failed to fetch")) {
-        toast.error("Cannot reach backend. Make sure server is running & API URL is correct.");
-      } else {
-        toast.error(err.message || "Unknown error. Please try again later.");
-      }
+      console.error(err);
+      toast.error(err.message || "❌ An error occurred. Please try again later.");
     }
   };
 
@@ -207,29 +173,13 @@ export default function Contact() {
         <section className="py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
           <div className="container mx-auto px-4 relative text-center max-w-4xl">
-            <motion.div
-              initial="initial"
-              animate="animate"
-              variants={{ animate: { transition: { staggerChildren: 0.1 } } }}
-            >
-              <motion.div variants={fadeInUp}>
-                <Badge className="mb-4">Get In Touch</Badge>
-              </motion.div>
-              <motion.h1
-                variants={fadeInUp}
-                className="text-4xl md:text-6xl font-bold mb-6"
-              >
-                Let's Build Something{" "}
-                <span className="bg-gradient-cyan bg-clip-text text-transparent">
-                  Amazing Together
-                </span>
+            <motion.div initial="initial" animate="animate" variants={{ animate: { transition: { staggerChildren: 0.1 } } }}>
+              <motion.div variants={fadeInUp}><Badge className="mb-4">Get In Touch</Badge></motion.div>
+              <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-6">
+                Let's Build Something <span className="bg-gradient-cyan bg-clip-text text-transparent">Amazing Together</span>
               </motion.h1>
-              <motion.p
-                variants={fadeInUp}
-                className="text-xl text-muted-foreground mb-8"
-              >
-                Share your project idea with me — I’ll help you turn it into
-                reality.
+              <motion.p variants={fadeInUp} className="text-xl text-muted-foreground mb-8">
+                Share your project idea with me — I’ll help you turn it into reality.
               </motion.p>
             </motion.div>
           </div>
@@ -245,98 +195,33 @@ export default function Contact() {
               variants={{ animate: { transition: { staggerChildren: 0.1 } } }}
               className="grid grid-cols-1 lg:grid-cols-3 gap-12"
             >
-              {/* Form */}
               <motion.div variants={fadeInUp} className="lg:col-span-2">
                 <Card className="p-8 glass border-border/20">
-                  <h2 className="text-3xl font-bold mb-4">
-                    Tell Me About Your Project
-                  </h2>
-                  <p className="text-muted-foreground mb-8">
-                    Fill in the details, and I’ll reply with a tailored plan &
-                    estimate.
-                  </p>
+                  <h2 className="text-3xl font-bold mb-4">Tell Me About Your Project</h2>
+                  <p className="text-muted-foreground mb-8">Fill in the details, and I’ll reply with a tailored plan & estimate.</p>
 
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Name + Email */}
                     <div className="grid md:grid-cols-2 gap-6">
-                      <InputField
-                        label="Name *"
-                        icon={User}
-                        register={register("name")}
-                        error={errors.name}
-                      />
-                      <InputField
-                        label="Email *"
-                        icon={Mail}
-                        type="email"
-                        register={register("email")}
-                        error={errors.email}
-                      />
+                      <InputField label="Name" icon={User} register={register("name")} error={errors.name} required />
+                      <InputField label="Email" icon={Mail} type="email" register={register("email")} error={errors.email} required />
                     </div>
 
-                    {/* Phone + Company */}
                     <div className="grid md:grid-cols-2 gap-6">
-                      <InputField
-                        label="Phone"
-                        icon={Phone}
-                        type="tel"
-                        register={register("phone")}
-                        error={errors.phone}
-                      />
-                      <InputField
-                        label="Company"
-                        icon={Building}
-                        register={register("company")}
-                        error={errors.company}
-                      />
+                      <InputField label="Phone" icon={Phone} type="tel" register={register("phone")} error={errors.phone} />
+                      <InputField label="Company" icon={Building} register={register("company")} error={errors.company} />
                     </div>
 
-                    {/* Project Type + Budget */}
                     <div className="grid md:grid-cols-2 gap-6">
-                      <SelectField
-                        label="Project Type *"
-                        register={register("projectType")}
-                        options={projectTypes}
-                        error={errors.projectType}
-                      />
-                      <SelectField
-                        label="Budget Range *"
-                        register={register("budget")}
-                        options={budgetRanges}
-                        error={errors.budget}
-                      />
+                      <SelectField label="Project Type" register={register("projectType")} options={projectTypes} error={errors.projectType} required />
+                      <SelectField label="Budget Range" register={register("budget")} options={budgetRanges} error={errors.budget} required />
                     </div>
 
-                    <SelectField
-                      label="Timeline *"
-                      register={register("timeline")}
-                      options={timelines}
-                      error={errors.timeline}
-                    />
+                    <SelectField label="Timeline" register={register("timeline")} options={timelines} error={errors.timeline} required />
 
-                    <TextAreaField
-                      label="Project Description *"
-                      icon={MessageSquare}
-                      rows={6}
-                      placeholder="Tell me about your goals, requirements, and vision..."
-                      register={register("message")}
-                      error={errors.message}
-                    />
+                    <TextAreaField label="Project Description" icon={MessageSquare} rows={6} placeholder="Tell me about your goals, requirements, and vision..." register={register("message")} error={errors.message} required />
 
-                    <Button
-                      type="submit"
-                      variant="hero"
-                      size="lg"
-                      disabled={isSubmitting}
-                      className="w-full"
-                    >
-                      {isSubmitting ? (
-                        "Sending..."
-                      ) : (
-                        <>
-                          Send Message <Send className="w-5 h-5 ml-2" />
-                        </>
-                      )}
+                    <Button type="submit" variant="hero" size="lg" disabled={isSubmitting} className="w-full">
+                      {isSubmitting ? "Sending..." : <>Send Message <Send className="w-5 h-5 ml-2" /></>}
                     </Button>
                   </form>
                 </Card>
@@ -347,16 +232,8 @@ export default function Contact() {
                 <Card className="p-6 glass border-border/20">
                   <h3 className="text-xl font-semibold mb-4">Quick Contact</h3>
                   <div className="space-y-4">
-                    <Button variant="neon" className="w-full justify-start" asChild>
-                      <a href="mailto:official@5dtech.in">
-                        <Mail className="w-4 h-4 mr-2" /> Email Me
-                      </a>
-                    </Button>
-                    <Button variant="neon" className="w-full justify-start" asChild>
-                      <a href="tel:+918825792220">
-                        <Phone className="w-4 h-4 mr-2" /> Call Now
-                      </a>
-                    </Button>
+                    <Button variant="neon" className="w-full justify-start" asChild><a href="mailto:official@5dtech.in"><Mail className="w-4 h-4 mr-2" /> Mail Us</a></Button>
+                    <Button variant="neon" className="w-full justify-start" asChild><a href="tel:+918825792220"><Phone className="w-4 h-4 mr-2" /> Call Now</a></Button>
                   </div>
                 </Card>
 
@@ -364,23 +241,13 @@ export default function Contact() {
                   <h3 className="text-xl font-semibold mb-4">Quick FAQ</h3>
                   <div className="space-y-4">
                     {[
-                      {
-                        q: "Response Time?",
-                        a: "Within 24 hours, often faster during business hours.",
-                      },
-                      {
-                        q: "Free Consultation?",
-                        a: "Yes, the first consultation and scoping is always free.",
-                      },
-                      {
-                        q: "Remote Work?",
-                        a: "Absolutely! I work with clients worldwide.",
-                      },
-                    ].map((faq) => (
+                      { q: "Response Time?", a: "Within 24 hours, often faster during business hours." },
+                      { q: "Free Consultation?", a: "Yes, the first consultation and scoping is always free." },
+                      { q: "Remote Work?", a: "Absolutely! I work with clients worldwide." },
+                    ].map(faq => (
                       <div key={faq.q}>
                         <h4 className="font-medium flex items-center mb-2">
-                          <CheckCircle className="w-4 h-4 text-primary mr-2" />{" "}
-                          {faq.q}
+                          <CheckCircle className="w-4 h-4 text-primary mr-2" /> {faq.q}
                         </h4>
                         <p className="text-sm text-muted-foreground">{faq.a}</p>
                       </div>
@@ -396,31 +263,15 @@ export default function Contact() {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {contactInfo.map((info) => (
-                <motion.div
-                  key={info.label}
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                >
-                  <Card
-                    className={clsx(
-                      "p-6 text-center glass border-border/20 transition-all duration-300 h-full",
-                      `hover:shadow-glow-${info.color} hover:border-${info.color}-400/40`
-                    )}
-                  >
-                    <div
-                      className={clsx(
-                        "w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4",
-                        `bg-gradient-${info.color} shadow-glow-${info.color}`
-                      )}
-                    >
+              {contactInfo.map(info => (
+                <motion.div key={info.label} variants={fadeInUp} whileHover={{ y: -8, scale: 1.02 }}>
+                  <Card className={clsx("p-6 text-center glass border-border/20 transition-all duration-300 h-full", `hover:shadow-glow-${info.color} hover:border-${info.color}-400/40`)}>
+                    <div className={clsx("w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4", `bg-gradient-${info.color} shadow-glow-${info.color}`)}>
                       <info.icon className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{info.label}</h3>
                     <p className="text-primary font-medium mb-2">{info.value}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {info.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{info.description}</p>
                   </Card>
                 </motion.div>
               ))}

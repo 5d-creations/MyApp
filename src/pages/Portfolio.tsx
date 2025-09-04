@@ -92,7 +92,7 @@ const projects = [
     description: "ML model for early diabetes prediction.",
     longDescription:
       "Advanced ML system analyzing lifestyle & genetic data with 94% accuracy.",
-    image: "/image.png",
+    image: "/dp.png",
     category: "Machine Learning",
     tech: ["Python", "TensorFlow", "Flask", "React", "Healthcare APIs"],
     featured: false,

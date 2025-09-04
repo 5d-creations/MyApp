@@ -4,17 +4,14 @@ import { motion } from "framer-motion";
 import {
   Github,
   Linkedin,
-  Twitter,
   Instagram,
+  MailIcon,
   Mail,
   Phone,
   MapPin,
-  MailIcon,
-  XCircle,
   XIcon,
 } from "lucide-react";
-import Logo from "/logo.svg"; // ✅ Import your logo
-import { XAxis } from "recharts";
+import Logo from "/logo.svg"; // Main logo
 
 const quickLinks = [
   { name: "Services", href: "/services" },
@@ -32,10 +29,10 @@ const services = [
 ];
 
 const socialLinks = [
-  { name: "Mail", href: "mailto:official@5dtech.in", icon: MailIcon },
-  { name: "LinkedIn", href: "https://linkedin.com/", icon: Linkedin },
-  { name: "Twitter", href: "https://twitter.com/", icon: XIcon },
-  { name: "Instagram", href: "https://www.instagram.com/5d_tech/", icon: Instagram },
+  { name: "Mail", href: "mailto:official@5dtech.in", icon: MailIcon, color: "cyan" },
+  { name: "LinkedIn", href: "https://linkedin.com/", icon: Linkedin, color: "blue" },
+  { name: "X", href: "https://x.com/tech_5d", icon: XIcon, color: "sky" },
+  { name: "Instagram", href: "https://www.instagram.com/5d_tech/", icon: Instagram, color: "pink" },
 ];
 
 const FooterLink = ({ to, children, external = false }) =>
@@ -60,7 +57,7 @@ const FooterLink = ({ to, children, external = false }) =>
 export function Footer() {
   return (
     <footer className="bg-surface border-t border-border/20 relative overflow-hidden">
-      {/* Gradient background */}
+      {/* Gradient mesh background */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-20 pointer-events-none" />
 
       <div className="container mx-auto px-4 relative">
@@ -79,28 +76,24 @@ export function Footer() {
                   <img
                     src={Logo}
                     alt="5D Tech Logo"
-                    className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)] group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(59,130,246,0.8)] group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                {/* Brand Text */}
                 <span className="hidden md:flex items-baseline space-x-1">
-                  {/* 5D */}
                   <span
                     className="text-3xl font-extrabold tracking-widest 
-        bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-600 
-        text-transparent bg-clip-text 
-        drop-shadow-[0_0_18px_rgba(0,255,255,0.9)] 
-        font-['Orbitron']"
-                    style={{ WebkitTextStroke: "0.6px #0ff" }}
+                    bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-600 
+                    text-transparent bg-clip-text 
+                    drop-shadow-[0_0_20px_rgba(0,255,255,0.9)] 
+                    font-['Orbitron']"
                   >
                     5D
                   </span>
-                  {/* Tech */}
                   <span
                     className="text-xl font-semibold 
-        bg-gradient-to-r from-gray-200 to-gray-400 
-        text-transparent bg-clip-text 
-        tracking-wide font-['Rajdhani']"
+                    bg-gradient-to-r from-gray-200 to-gray-400 
+                    text-transparent bg-clip-text 
+                    tracking-wide font-['Rajdhani']"
                   >
                     Tech
                   </span>
@@ -110,8 +103,9 @@ export function Footer() {
                 Build bold experiences in 5 Dimensions — design, code, speed,
                 reliability, and impact.
               </p>
+
               <div className="flex space-x-4">
-                {socialLinks.map(({ name, href, icon: Icon }) => (
+                {socialLinks.map(({ name, href, icon: Icon, color }) => (
                   <motion.a
                     key={name}
                     href={href}
@@ -119,7 +113,7 @@ export function Footer() {
                     rel="noopener noreferrer"
                     aria-label={name}
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="w-10 h-10 glass rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:shadow-glow-cyan transition-all duration-300"
+                    className={`w-10 h-10 glass rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:shadow-glow-${color} transition-all duration-300`}
                   >
                     <Icon className="w-5 h-5" />
                   </motion.a>
