@@ -81,7 +81,7 @@ const Hero = () => (
             </Link>
           </Button>
           <Button variant="neon" size="xl" asChild>
-            <Link to="/portfolio">View My Work</Link>
+            <Link to="/portfolio">View Our Work</Link>
           </Button>
         </motion.div>
       </motion.div>

@@ -97,7 +97,7 @@ export default function About() {
                     </Link>
                   </Button>
                   <Button variant="neon" asChild>
-                    <Link to="/portfolio">View My Work</Link>
+                    <Link to="/portfolio">View Our Work</Link>
                   </Button>
                 </div>
               </motion.div>
@@ -300,7 +300,7 @@ export default function About() {
                   <Link to="/contact">Start a Project</Link>
                 </Button>
                 <Button variant="neon" size="lg" asChild>
-                  <Link to="/portfolio">View My Work</Link>
+                  <Link to="/portfolio">View Our Work</Link>
                 </Button>
               </div>
             </motion.div>
