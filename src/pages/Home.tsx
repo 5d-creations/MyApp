@@ -67,7 +67,7 @@ const Hero = () => (
           variants={fadeInUp}
           className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
         >
-          Design, code, speed, reliability, and impact. I craft modern web apps with a glowing aesthetic, clean architecture, and measurable results.
+          Design, code, speed, reliability, and impact. We craft modern web apps with a glowing aesthetic, clean architecture, and measurable results.
         </motion.p>
 
         <motion.div
@@ -184,8 +184,8 @@ const testimonials = [
     avatar: "MK"
   },
   {
-    name: "Mithunkarthik",
-    role: "Early Career Dev",
+    name: "Gowshick Gandhi",
+    role: "SEO Analys",
     content:
       "Working with 5D was a game-changer. They understood our vision perfectly and delivered a solution that exceeded our expectations.",
     rating: 5,
@@ -198,14 +198,6 @@ const testimonials = [
       "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
     rating: 5,
     avatar: "MV"
-  },
-  {
-    name: "Gowshick Gandhi",
-    role: "SEo Analyst",
-    content:
-      "The design and development quality is outstanding. Our new platform has improved user engagement by 300% since launch.",
-    rating: 5,
-    avatar: "GG"
   }
 ];
 
